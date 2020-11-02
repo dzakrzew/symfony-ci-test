@@ -19,4 +19,11 @@ jobs:
       
       - name: Run phpunit tests
         run: bin/phpunit
-    
+      - name: Deploy to server
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          SOURCE: "."
+          SSH_HOST: ${{ secrets.SERVER_SSH_HOST }}
+          SSH_USER: ${{ secrets.SERVER_SSH_USER }}
+          TARGET: ${{ secrets.SERVER_APP_DIRECTORY }}
